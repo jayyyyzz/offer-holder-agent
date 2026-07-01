@@ -1,0 +1,20 @@
+﻿artifact,path,category,exists,row_count,file_count,updated_at,notes
+source_list,source_list.csv,input,yes,56,,2026-06-29T01:13:38+00:00,Official source registry.
+raw_pages,data/raw_pages,archive,yes,,57,2026-06-29T15:53:14+00:00,Archived official-page text files.
+crawl_log,data/metadata/crawl_log.csv,crawl,yes,88,,2026-06-29T15:53:14+00:00,Append-only crawl attempt log.
+crawl_summary,data/metadata/crawl_summary.csv,crawl,yes,56,,2026-06-29T15:59:00+00:00,Latest status per source URL.
+data_quality_report,data/metadata/data_quality_report.csv,quality,yes,56,,2026-06-29T15:59:00+00:00,"Coverage audit across sources, raw pages, chunks, FAQ, and tasks."
+faq_quality_report,data/metadata/faq_quality_report.csv,quality,yes,252,,2026-06-29T15:58:27+00:00,FAQ candidate quality decisions.
+task_evidence_quality_report,data/metadata/task_evidence_quality_report.csv,quality,yes,446,,2026-06-30T14:01:11+00:00,Task evidence keep/review/reject decisions before enriching tasks.
+schools,data/cleaned/schools.csv,cleaned,yes,8,,2026-06-29T00:47:17+00:00,School-level URL catalog.
+tasks,data/cleaned/tasks.csv,cleaned,yes,64,,2026-06-29T00:22:38+00:00,Seed task templates.
+tasks_enriched,data/cleaned/tasks_enriched.csv,cleaned,yes,64,,2026-06-30T14:01:22+00:00,Task templates joined with official-source evidence snippets.
+user_states,data/cleaned/user_states.csv,state,yes,0,,2026-06-30T00:18:57+00:00,Local CSV-backed student state store.
+user_task_states,data/cleaned/user_task_states.csv,state,yes,0,,2026-06-30T13:49:24+00:00,"Local per-user task status, deadline, and reminder store."
+faq,data/cleaned/faq.csv,cleaned,yes,252,,2026-06-29T15:58:16+00:00,Raw FAQ candidates extracted from pages.
+faq_cleaned,data/cleaned/faq_cleaned.csv,cleaned,yes,248,,2026-06-29T15:58:27+00:00,Cleaned structured FAQ rows.
+task_evidence,data/cleaned/task_evidence.csv,cleaned,yes,446,,2026-06-30T00:01:18+00:00,Task-field evidence extracted from official FAQ text.
+chunks,knowledge_base/chunks.csv,rag,yes,847,,2026-06-29T15:58:44+00:00,Local retrieval chunks.
+vector_index,knowledge_base/vector_index.csv,rag,yes,847,,2026-06-30T00:19:09+00:00,Dependency-light sparse vector index for retrieval experimentation.
+raw_page_index,data/metadata/raw_page_index.csv,metadata,yes,57,,2026-06-30T14:01:32+00:00,Index of archived raw text files.
+schema_dictionary,data/metadata/schema_dictionary.csv,metadata,yes,228,,2026-06-30T14:01:32+00:00,Column dictionary for Phase 1 CSV outputs.

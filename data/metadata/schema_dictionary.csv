@@ -1,0 +1,229 @@
+﻿dataset,column,required,description
+source_list.csv,school,yes,"School code, e.g. HKU, CUHK, HKUST, CityU, PolyU, HKBU."
+source_list.csv,page_type,yes,"Official page category, e.g. offer_holder, visa, accommodation, tuition, registration, orientation, faq."
+source_list.csv,stage,yes,Offer-holder preparation stage used by the planner and retriever.
+source_list.csv,url,yes,Official source URL from the school website.
+source_list.csv,priority,yes,Crawl priority; lower number means more important.
+source_list.csv,need_dynamic,yes,Whether the page usually needs browser rendering.
+source_list.csv,remark,yes,Human note about the source.
+crawl_log.csv,school,yes,"School code, e.g. HKU, CUHK, HKUST, CityU, PolyU, HKBU."
+crawl_log.csv,page_type,yes,"Official page category, e.g. offer_holder, visa, accommodation, tuition, registration, orientation, faq."
+crawl_log.csv,stage,yes,Offer-holder preparation stage used by the planner and retriever.
+crawl_log.csv,source_url,yes,Original official URL used as evidence source.
+crawl_log.csv,final_url,yes,Final URL after redirects.
+crawl_log.csv,priority,yes,Crawl priority; lower number means more important.
+crawl_log.csv,need_dynamic,yes,Whether the page usually needs browser rendering.
+crawl_log.csv,status,yes,"Crawler result status such as success, soft_blocked, request_error, or skipped_exists."
+crawl_log.csv,http_status,yes,HTTP status returned by the source server.
+crawl_log.csv,title,yes,Page title or inferred document title.
+crawl_log.csv,crawled_at,yes,Timestamp when the page was archived.
+crawl_log.csv,raw_file,yes,Relative path to the archived raw text file.
+crawl_log.csv,content_type,yes,Detected response content type.
+crawl_log.csv,char_count,yes,Text character count recorded during crawling.
+crawl_log.csv,elapsed_ms,yes,Crawl duration in milliseconds.
+crawl_log.csv,error,yes,Crawler error or attention reason.
+crawl_summary.csv,school,yes,"School code, e.g. HKU, CUHK, HKUST, CityU, PolyU, HKBU."
+crawl_summary.csv,page_type,yes,"Official page category, e.g. offer_holder, visa, accommodation, tuition, registration, orientation, faq."
+crawl_summary.csv,stage,yes,Offer-holder preparation stage used by the planner and retriever.
+crawl_summary.csv,source_url,yes,Original official URL used as evidence source.
+crawl_summary.csv,priority,yes,Crawl priority; lower number means more important.
+crawl_summary.csv,need_dynamic,yes,Whether the page usually needs browser rendering.
+crawl_summary.csv,latest_status,yes,
+crawl_summary.csv,latest_http_status,yes,
+crawl_summary.csv,latest_title,yes,
+crawl_summary.csv,latest_final_url,yes,
+crawl_summary.csv,latest_crawled_at,yes,
+crawl_summary.csv,latest_raw_file,yes,
+crawl_summary.csv,latest_content_type,yes,
+crawl_summary.csv,latest_char_count,yes,
+crawl_summary.csv,usable_status,yes,
+crawl_summary.csv,usable_title,yes,
+crawl_summary.csv,usable_final_url,yes,
+crawl_summary.csv,usable_crawled_at,yes,
+crawl_summary.csv,usable_raw_file,yes,
+crawl_summary.csv,usable_content_type,yes,
+crawl_summary.csv,usable_char_count,yes,
+crawl_summary.csv,attempt_count,yes,
+crawl_summary.csv,success_count,yes,
+crawl_summary.csv,last_success_at,yes,
+crawl_summary.csv,raw_file_exists,yes,
+crawl_summary.csv,needs_attention,yes,
+crawl_summary.csv,attention_reason,yes,
+crawl_summary.csv,latest_error,yes,
+data_quality_report.csv,school,yes,"School code, e.g. HKU, CUHK, HKUST, CityU, PolyU, HKBU."
+data_quality_report.csv,page_type,yes,"Official page category, e.g. offer_holder, visa, accommodation, tuition, registration, orientation, faq."
+data_quality_report.csv,stage,yes,Offer-holder preparation stage used by the planner and retriever.
+data_quality_report.csv,source_url,yes,Original official URL used as evidence source.
+data_quality_report.csv,latest_status,yes,
+data_quality_report.csv,usable_status,yes,
+data_quality_report.csv,latest_char_count,yes,
+data_quality_report.csv,usable_char_count,yes,
+data_quality_report.csv,raw_file_exists,yes,
+data_quality_report.csv,chunk_count,yes,
+data_quality_report.csv,faq_count,yes,
+data_quality_report.csv,task_count,yes,
+data_quality_report.csv,coverage_level,yes,
+data_quality_report.csv,needs_attention,yes,
+data_quality_report.csv,notes,yes,Human note for the row.
+task_evidence_quality_report.csv,evidence_id,yes,Stable evidence identifier.
+task_evidence_quality_report.csv,school,yes,"School code, e.g. HKU, CUHK, HKUST, CityU, PolyU, HKBU."
+task_evidence_quality_report.csv,task_code,yes,Task template code inferred from official text.
+task_evidence_quality_report.csv,stage,yes,Offer-holder preparation stage used by the planner and retriever.
+task_evidence_quality_report.csv,evidence_type,yes,"Type of extracted task evidence such as deadline, required_document, action_url, fee_amount, or action_instruction."
+task_evidence_quality_report.csv,source_url,yes,Original official URL used as evidence source.
+task_evidence_quality_report.csv,source_question,yes,FAQ question that produced the evidence.
+task_evidence_quality_report.csv,confidence,yes,Rule-based confidence label for the evidence row.
+task_evidence_quality_report.csv,text_char_count,yes,Character count of the audited evidence text.
+task_evidence_quality_report.csv,task_keyword_hit_count,yes,Number of task-specific keywords found in the evidence row.
+task_evidence_quality_report.csv,field_keyword_hit_count,yes,Number of field-specific keywords found in the evidence row.
+task_evidence_quality_report.csv,source_stage_match,yes,Whether the source page type or stage matches the inferred task.
+task_evidence_quality_report.csv,source_page_type,yes,Page type recorded in source_list.csv for the evidence source URL.
+task_evidence_quality_report.csv,normalized_value_present,yes,Whether the evidence row contains a normalized value.
+task_evidence_quality_report.csv,low_quality_flags,yes,"Rule-based flags such as admission_noise, navigation_noise, or source_context_only."
+task_evidence_quality_report.csv,quality_score,yes,Rule-based evidence quality score from 0 to 100.
+task_evidence_quality_report.csv,quality_decision,yes,"Quality decision for promotion into task fields: keep, review, or reject."
+task_evidence_quality_report.csv,notes,yes,Human note for the row.
+task_evidence_quality_report.csv,reviewed_at,yes,Date when the quality audit was generated.
+raw_page_index.csv,raw_file,yes,Relative path to the archived raw text file.
+raw_page_index.csv,school,yes,"School code, e.g. HKU, CUHK, HKUST, CityU, PolyU, HKBU."
+raw_page_index.csv,page_type,yes,"Official page category, e.g. offer_holder, visa, accommodation, tuition, registration, orientation, faq."
+raw_page_index.csv,stage,yes,Offer-holder preparation stage used by the planner and retriever.
+raw_page_index.csv,source_url,yes,Original official URL used as evidence source.
+raw_page_index.csv,final_url,yes,Final URL after redirects.
+raw_page_index.csv,title,yes,Page title or inferred document title.
+raw_page_index.csv,content_type,yes,Detected response content type.
+raw_page_index.csv,extraction_method,yes,
+raw_page_index.csv,crawled_at,yes,Timestamp when the page was archived.
+raw_page_index.csv,body_char_count,yes,
+raw_page_index.csv,total_char_count,yes,
+raw_page_index.csv,line_count,yes,
+schools.csv,school_id,yes,Canonical school code.
+schools.csv,school_name,yes,Full school name.
+schools.csv,official_website,yes,School official website.
+schools.csv,offer_holder_url,yes,Official offer-holder or admissions URL.
+schools.csv,admitted_student_url,yes,Official admitted/new student URL.
+schools.csv,visa_url,yes,Official student visa or entry permit URL.
+schools.csv,accommodation_url,yes,Official accommodation URL.
+schools.csv,tuition_url,yes,Official tuition/fees/payment URL.
+schools.csv,orientation_url,yes,Official orientation or arrival URL.
+tasks.csv,task_id,yes,"Stable task identifier, usually school plus task code."
+tasks.csv,school,yes,"School code, e.g. HKU, CUHK, HKUST, CityU, PolyU, HKBU."
+tasks.csv,stage,yes,Offer-holder preparation stage used by the planner and retriever.
+tasks.csv,task_name,yes,User-facing task name.
+tasks.csv,description,yes,Task explanation shown to the student.
+tasks.csv,trigger_condition,yes,Student state that makes the task relevant.
+tasks.csv,deadline,yes,Deadline rule or official deadline evidence.
+tasks.csv,required_documents,yes,Documents the student may need to prepare.
+tasks.csv,action_url,yes,Official URL where the user should act or read instructions.
+tasks.csv,risk_level,yes,"Risk severity: high, medium, or low."
+tasks.csv,source_url,yes,Original official URL used as evidence source.
+tasks.csv,updated_at,yes,Date or timestamp when the row was generated.
+tasks_enriched.csv,task_id,yes,"Stable task identifier, usually school plus task code."
+tasks_enriched.csv,school,yes,"School code, e.g. HKU, CUHK, HKUST, CityU, PolyU, HKBU."
+tasks_enriched.csv,stage,yes,Offer-holder preparation stage used by the planner and retriever.
+tasks_enriched.csv,task_name,yes,User-facing task name.
+tasks_enriched.csv,description,yes,Task explanation shown to the student.
+tasks_enriched.csv,trigger_condition,yes,Student state that makes the task relevant.
+tasks_enriched.csv,deadline,yes,Deadline rule or official deadline evidence.
+tasks_enriched.csv,required_documents,yes,Documents the student may need to prepare.
+tasks_enriched.csv,action_url,yes,Official URL where the user should act or read instructions.
+tasks_enriched.csv,risk_level,yes,"Risk severity: high, medium, or low."
+tasks_enriched.csv,source_url,yes,Original official URL used as evidence source.
+tasks_enriched.csv,updated_at,yes,Date or timestamp when the row was generated.
+tasks_enriched.csv,task_code,yes,Task template code inferred from official text.
+tasks_enriched.csv,evidence_count,yes,Number of evidence rows matched to the task.
+tasks_enriched.csv,candidate_evidence_count,yes,Number of candidate evidence rows before quality filtering.
+tasks_enriched.csv,usable_evidence_count,yes,Number of evidence rows promoted into official task fields.
+tasks_enriched.csv,review_evidence_count,yes,Number of evidence rows that need human review or are missing an audit decision.
+tasks_enriched.csv,rejected_evidence_count,yes,Number of evidence rows rejected by the quality audit.
+tasks_enriched.csv,evidence_types,yes,Evidence types matched to the task.
+tasks_enriched.csv,official_deadline_evidence,yes,Official snippets related to deadlines.
+tasks_enriched.csv,official_document_evidence,yes,Official snippets related to required documents.
+tasks_enriched.csv,official_action_evidence,yes,Official snippets related to actions the student should take.
+tasks_enriched.csv,official_action_urls,yes,Official URLs extracted from task evidence.
+tasks_enriched.csv,official_fee_evidence,yes,Official snippets related to fees or payment amounts.
+tasks_enriched.csv,evidence_ids,yes,Evidence row identifiers matched to the task.
+tasks_enriched.csv,evidence_quality_status,yes,Whether task evidence quality filtering was applied.
+tasks_enriched.csv,evidence_quality_notes,yes,Compact count summary from the task evidence quality audit.
+tasks_enriched.csv,enrichment_status,yes,Whether official evidence was matched to the task row.
+tasks_enriched.csv,enriched_at,yes,Date when the enriched task row was generated.
+user_states.csv,user_id,yes,Local user state identifier.
+user_states.csv,school,yes,"School code, e.g. HKU, CUHK, HKUST, CityU, PolyU, HKBU."
+user_states.csv,origin,yes,"Student origin, e.g. Mainland China."
+user_states.csv,program_type,yes,"Program type, e.g. TPG."
+user_states.csv,has_conditional_offer,yes,Whether the student has a conditional offer.
+user_states.csv,completed_flags,yes,Semicolon-separated completed task flags.
+user_states.csv,notes,yes,Human note for the row.
+user_states.csv,updated_at,yes,Date or timestamp when the row was generated.
+user_task_states.csv,user_id,yes,Local user state identifier.
+user_task_states.csv,school,yes,"School code, e.g. HKU, CUHK, HKUST, CityU, PolyU, HKBU."
+user_task_states.csv,task_id,yes,"Stable task identifier, usually school plus task code."
+user_task_states.csv,task_code,yes,Task template code inferred from official text.
+user_task_states.csv,stage,yes,Offer-holder preparation stage used by the planner and retriever.
+user_task_states.csv,status,yes,"Crawler result status such as success, soft_blocked, request_error, or skipped_exists."
+user_task_states.csv,status_updated_at,yes,Timestamp when a user task status was last updated.
+user_task_states.csv,deadline_at,yes,"User-confirmed task deadline from portal, offer letter, or school email."
+user_task_states.csv,deadline_timezone,yes,Timezone attached to the user-confirmed deadline.
+user_task_states.csv,deadline_source,yes,Where the user-confirmed deadline came from.
+user_task_states.csv,deadline_source_ref,yes,Optional URL or note identifying the deadline source.
+user_task_states.csv,reminder_at,yes,User reminder timestamp.
+user_task_states.csv,reminder_timezone,yes,Timezone attached to the reminder timestamp.
+user_task_states.csv,reminder_status,yes,"Reminder state such as pending, sent, dismissed, or disabled."
+user_task_states.csv,notes,yes,Human note for the row.
+user_task_states.csv,updated_at,yes,Date or timestamp when the row was generated.
+faq.csv,question,yes,FAQ question.
+faq.csv,answer,yes,FAQ answer.
+faq.csv,school,yes,"School code, e.g. HKU, CUHK, HKUST, CityU, PolyU, HKBU."
+faq.csv,stage,yes,Offer-holder preparation stage used by the planner and retriever.
+faq.csv,category,yes,FAQ category inferred from the question and answer.
+faq.csv,risk_level,yes,"Risk severity: high, medium, or low."
+faq.csv,source_url,yes,Original official URL used as evidence source.
+faq.csv,updated_at,yes,Date or timestamp when the row was generated.
+faq_cleaned.csv,question,yes,FAQ question.
+faq_cleaned.csv,answer,yes,FAQ answer.
+faq_cleaned.csv,school,yes,"School code, e.g. HKU, CUHK, HKUST, CityU, PolyU, HKBU."
+faq_cleaned.csv,stage,yes,Offer-holder preparation stage used by the planner and retriever.
+faq_cleaned.csv,category,yes,FAQ category inferred from the question and answer.
+faq_cleaned.csv,risk_level,yes,"Risk severity: high, medium, or low."
+faq_cleaned.csv,source_url,yes,Original official URL used as evidence source.
+faq_cleaned.csv,updated_at,yes,Date or timestamp when the row was generated.
+task_evidence.csv,evidence_id,yes,Stable evidence identifier.
+task_evidence.csv,task_code,yes,Task template code inferred from official text.
+task_evidence.csv,school,yes,"School code, e.g. HKU, CUHK, HKUST, CityU, PolyU, HKBU."
+task_evidence.csv,stage,yes,Offer-holder preparation stage used by the planner and retriever.
+task_evidence.csv,evidence_type,yes,"Type of extracted task evidence such as deadline, required_document, action_url, fee_amount, or action_instruction."
+task_evidence.csv,evidence_text,yes,Official-source snippet that supports the task field.
+task_evidence.csv,normalized_value,yes,Normalized value extracted from the evidence when available.
+task_evidence.csv,source_question,yes,FAQ question that produced the evidence.
+task_evidence.csv,source_url,yes,Original official URL used as evidence source.
+task_evidence.csv,confidence,yes,Rule-based confidence label for the evidence row.
+task_evidence.csv,updated_at,yes,Date or timestamp when the row was generated.
+chunks.csv,chunk_id,yes,Retrieval chunk identifier.
+chunks.csv,school,yes,"School code, e.g. HKU, CUHK, HKUST, CityU, PolyU, HKBU."
+chunks.csv,page_type,yes,"Official page category, e.g. offer_holder, visa, accommodation, tuition, registration, orientation, faq."
+chunks.csv,stage,yes,Offer-holder preparation stage used by the planner and retriever.
+chunks.csv,title,yes,Page title or inferred document title.
+chunks.csv,source_url,yes,Original official URL used as evidence source.
+chunks.csv,final_url,yes,Final URL after redirects.
+chunks.csv,raw_file,yes,Relative path to the archived raw text file.
+chunks.csv,chunk_index,yes,Index of the chunk within one raw file.
+chunks.csv,text,yes,Retrieval text content.
+chunks.csv,updated_at,yes,Date or timestamp when the row was generated.
+vector_index.csv,chunk_id,yes,Retrieval chunk identifier.
+vector_index.csv,school,yes,"School code, e.g. HKU, CUHK, HKUST, CityU, PolyU, HKBU."
+vector_index.csv,page_type,yes,"Official page category, e.g. offer_holder, visa, accommodation, tuition, registration, orientation, faq."
+vector_index.csv,stage,yes,Offer-holder preparation stage used by the planner and retriever.
+vector_index.csv,title,yes,Page title or inferred document title.
+vector_index.csv,source_url,yes,Original official URL used as evidence source.
+vector_index.csv,raw_file,yes,Relative path to the archived raw text file.
+vector_index.csv,token_count,yes,Total token frequency count stored in the sparse vector.
+vector_index.csv,vector_json,yes,JSON object storing sparse term-frequency weights.
+vector_index.csv,updated_at,yes,Date or timestamp when the row was generated.
+phase1_manifest.csv,artifact,yes,
+phase1_manifest.csv,path,yes,
+phase1_manifest.csv,category,yes,FAQ category inferred from the question and answer.
+phase1_manifest.csv,exists,yes,
+phase1_manifest.csv,row_count,yes,
+phase1_manifest.csv,file_count,yes,
+phase1_manifest.csv,updated_at,yes,Date or timestamp when the row was generated.
+phase1_manifest.csv,notes,yes,Human note for the row.

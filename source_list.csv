@@ -1,0 +1,57 @@
+school,page_type,stage,url,priority,need_dynamic,remark
+HKU,offer_holder,offer_acceptance,https://admissions.hku.hk/tpg/,1,no,TPG admissions landing page; programme-specific offer deadlines remain in the offer letter
+HKU,visa,visa,https://studentvisa.hku.hk/,1,no,Official HKU student visa portal for undergraduate and postgraduate students
+HKU,accommodation,housing,https://housing.cedars.hku.hk/,1,no,CEDARS university and off-campus housing information
+HKU,tuition,payment,https://admissions.hku.hk/tpg/,2,no,TPG admissions page links programme-specific tuition information; exact fees vary by programme
+HKU,registration,registration,https://ase.hku.hk/mr/mr_guide.pdf,1,no,Official online master registration guide; PDF extraction is deferred
+HKU,orientation,orientation,https://www.cedars.hku.hk/non-local/orientationdaypg,2,no,CEDARS orientation day for non-local postgraduate students
+HKU,faq,general,https://admissions.hku.hk/tpg/faq,2,no,TPG admissions FAQ
+CUHK,admitted_student,offer_acceptance,https://www.gs.cuhk.edu.hk/admissions,1,no,Graduate School after-receiving-an-offer entry point
+CUHK,visa,visa,https://www.gs.cuhk.edu.hk/registration/visa-application,1,no,Graduate School visa application for new students
+CUHK,registration,registration,https://www.gs.cuhk.edu.hk/registration/how-to-register,1,no,Registration guide for postgraduate students
+CUHK,accommodation,housing,https://www.gs.cuhk.edu.hk/admissions/campus-support,1,no,Postgraduate hall eligibility and campus support
+CUHK,orientation,orientation,https://www.gs.cuhk.edu.hk/academics/preparation-for-new-academic-year,2,no,Preparation and orientation entry point for new academic year
+CUHK,tuition,payment,https://www.gs.cuhk.edu.hk/academics/preparation-for-new-academic-year,2,no,New academic year page includes fee and payment preparation
+CUHK,faq,general,https://www.gs.cuhk.edu.hk/admissions/faqs,2,no,Graduate School admissions FAQ
+HKUST,offer_holder,offer_acceptance,https://fytgs.hkust.edu.hk/admissions/Admission-to-Hong-Kong-Campus/after-getting-an-offer/accepting-offer,1,no,Offer acceptance and deposit guidance
+HKUST,visa,visa,https://fytgs.hkust.edu.hk/admissions/Admission-to-Hong-Kong-Campus/after-getting-an-offer/applying-student-visa,1,no,Student visa and immigration arrangements
+HKUST,accommodation,housing,https://shrl.hkust.edu.hk/apply-for-housing/pg/tpgs-visiting-internship-students-and-mba-students,1,no,Official housing eligibility and off-campus expectation for TPG students
+HKUST,tuition,payment,https://fytgs.hkust.edu.hk/admissions/Admission-to-Hong-Kong-Campus/submitting-an-application/scholarships-and-fees,1,no,Tuition fees and scholarships
+HKUST,registration,registration,https://fytgs.hkust.edu.hk/admissions/Admission-to-Hong-Kong-Campus/after-getting-an-offer/handy-resources-preparing-your-studies/handy-resources-tpg,1,no,TPG preparation and account activation checklist
+HKUST,orientation,orientation,https://fytgs.hkust.edu.hk/admissions/Admission-to-Hong-Kong-Campus/after-getting-an-offer/moving-to-hong-kong,2,yes,Arrival and preparation resources for non-local students; browser rendering expands page content
+HKUST,faq,general,https://fytgs.hkust.edu.hk/admissions/faq,2,no,Postgraduate admissions FAQ
+CityU,admitted_student,offer_acceptance,https://www.cityu.edu.hk/pg/taught-postgraduate-programmes,1,yes,TPG admissions site may be protected by WAF
+CityU,visa,visa,https://www.cityu.edu.hk/geo/non-local-students/visa,1,yes,Global Engagement Office student visa guidance; WAF may require browser collection
+CityU,accommodation,housing,https://www.cityu.edu.hk/sro/StudentHousing/PGHalls/MDS/,1,yes,Student residence information for master's degree students; WAF may require browser collection
+CityU,tuition,payment,https://www.cityu.edu.hk/pg/taught-postgraduate-programmes,2,yes,Programme-level tuition information; WAF may require browser collection
+CityU,registration,registration,https://www.cityu.edu.hk/arro/,1,yes,Academic Registry new student enrolment and registration entry point; WAF may require browser collection
+CityU,orientation,orientation,https://www.cityu.edu.hk/orientation/event/postgraduate-student-orientation,2,yes,Postgraduate student orientation page; WAF may require browser collection
+CityU,faq,general,https://www.cityu.edu.hk/pg/taught-postgraduate-programmes/faq,2,yes,Postgraduate admissions FAQ; may require browser collection
+PolyU,offer_holder,offer_acceptance,https://www.polyu.edu.hk/study/pg/taught-postgraduate/,1,no,Taught postgraduate admissions entry point
+PolyU,visa,visa,https://www.polyu.edu.hk/ar/web/for-new-students/non-local-students/important-notes-for-non-local-students/,1,no,Visa and pre-arrival notes for non-local students
+PolyU,accommodation,housing,https://www.polyu.edu.hk/sao/student-resources-and-support-section/residential-life/,1,no,Residential life and off-campus accommodation information
+PolyU,tuition,payment,https://www.polyu.edu.hk/study/pg/taught-postgraduate/tuition-fees-tpg,1,no,TPG tuition fees by programme
+PolyU,registration,registration,https://www.polyu.edu.hk/ar/students-in-taught-programmes/registration-information/programme-registration-enrolment/,1,no,Programme registration and enrolment
+PolyU,orientation,orientation,https://www.polyu.edu.hk/sao/student-resources-and-support-section/non-local-student-services/programmes-for-nls/orientation-and-welcoming-weeks/,2,no,Orientation and welcoming weeks for non-local students
+PolyU,faq,general,https://www.polyu.edu.hk/study/pg/taught-postgraduate/frequently-asked-questions-tpg,2,no,TPG admissions FAQ
+HKBU,admitted_student,offer_acceptance,https://ar.hkbu.edu.hk/tpg-studies/prospective-student/how-to-apply/5-after-accepting-an-offer-important-information,1,no,Important information for newly admitted taught postgraduate students
+HKBU,visa,visa,https://ar.hkbu.edu.hk/tpg-studies/prospective-student/how-to-apply/5-after-accepting-an-offer-student-visa-application,1,no,TPG student visa application
+HKBU,accommodation,housing,https://sa.hkbu.edu.hk/en/accm/on-campus-accommodation/apply-for-pg-accommodation/non-local-taught-postgraduate-students.html,2,no,Accommodation for full-time non-local taught postgraduate students
+HKBU,tuition,payment,https://ar.hkbu.edu.hk/tpg-studies/current-students/academic-requirements/tuition-fees,1,no,TPG tuition fee payment arrangements
+HKBU,registration,registration,https://ar.hkbu.edu.hk/tpg-studies/prospective-student/how-to-apply/5-after-accepting-an-offer-registration-for-newly-admitted-students,1,no,Registration for newly admitted TPG students
+HKBU,orientation,orientation,https://ar.hkbu.edu.hk/tpg-studies/current-students/orientation-information,2,no,Orientation information for newly admitted TPG students
+HKBU,faq,general,https://ar.hkbu.edu.hk/tpg-studies/faq/after-acceptance-of-admission-offer,2,no,TPG FAQ after acceptance of admission offer
+Lingnan,admitted_student,offer_acceptance,https://www.ln.edu.hk/sgs/for-prospective-students/taught-postgraduate-programmes/admission-information,1,no,School of Graduate Studies TPG admission information
+Lingnan,visa,visa,https://www.ln.edu.hk/fb/tpo/applications/information-for-non-local-applicants,1,no,Official non-local TPG applicant guidance; programme office details may differ
+Lingnan,accommodation,housing,https://www.ln.edu.hk/osa/student-experience/cultural-integration/planning-your-arrival/accommodation,1,no,Office of Student Affairs accommodation information
+Lingnan,tuition,payment,https://www.ln.edu.hk/sgs/tpg,2,yes,TPG programme and tuition entry point; browser rendering expands page content
+Lingnan,registration,registration,https://www.ln.edu.hk/sgs/for-prospective-students/taught-postgraduate-programmes/admission-information,1,no,Admission information; final registration instructions may arrive by email
+Lingnan,orientation,orientation,https://www.ln.edu.hk/osa/student-experience/cultural-integration/orientation-and-support/orientation-for-non-local-taught-postgraduate-students,2,no,Orientation for non-local TPG students
+Lingnan,faq,general,https://www.ln.edu.hk/sgs/tpg/applications/faqs,2,yes,Official TPG applications FAQ; browser rendering may expand page content
+EdUHK,admitted_student,offer_acceptance,https://gs.eduhk.hk/prospective/after-getting-an-offer/,1,no,Graduate School after-getting-an-offer guidance
+EdUHK,visa,visa,https://gs.eduhk.hk/prospective/information-for-non-local-student/,1,yes,Non-local postgraduate visa and arrival information; browser rendering expands page content
+EdUHK,accommodation,housing,https://gs.eduhk.hk/prospective/information-for-non-local-student/,1,yes,Non-local postgraduate accommodation guidance; browser rendering expands page content
+EdUHK,tuition,payment,https://gs.eduhk.hk/pg-programmes-2026/application-admission.html,1,no,2026 postgraduate application admission fees and visa arrangements
+EdUHK,registration,registration,https://gs.eduhk.hk/prospective/after-getting-an-offer/,1,no,After-offer registration information
+EdUHK,orientation,orientation,https://gs.eduhk.hk/current/student-support/,2,no,Graduate School new student support and orientation entry point
+EdUHK,faq,general,https://gs.eduhk.hk/prospective/information-for-non-local-student/,2,yes,Non-local postgraduate FAQ; browser rendering expands page content

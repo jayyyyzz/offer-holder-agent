@@ -1,0 +1,18 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.venv/
+venv/
+frontend-react/node_modules/
+.better-web-ui.md
+
+# Generated crawl artifacts.
+data/raw_pages/*.txt
+data/metadata/crawl_log.csv
+data/metadata/*.tmp
+data/metadata/openai_runs/
+
+# Keep directory and schema templates.
+!data/raw_pages/.gitkeep
+!data/metadata/.gitkeep

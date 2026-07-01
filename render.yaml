@@ -1,0 +1,29 @@
+services:
+  - type: web
+    runtime: docker
+    name: offer-holder-agent
+    plan: starter
+    healthCheckPath: /health
+    disk:
+      name: offer-agent-data
+      mountPath: /app/data
+      sizeGB: 10
+    envVars:
+      - key: PORT
+        value: "8080"
+      - key: OFFER_AGENT_HOST
+        value: 0.0.0.0
+      - key: OFFER_AGENT_PORT
+        value: "8080"
+      - key: OFFER_AGENT_RUNTIME_DATA_ROOT
+        value: /app/data
+      - key: OFFER_AGENT_SEED_DATA_ROOT
+        value: /app-seed-data
+      - key: OFFER_AGENT_READ_ONLY
+        value: "false"
+      - key: OFFER_AGENT_BASIC_AUTH_USER
+        value: jayz
+      - key: OFFER_AGENT_BASIC_AUTH_PASSWORD
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false

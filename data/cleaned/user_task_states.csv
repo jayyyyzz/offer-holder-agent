@@ -1,0 +1,2 @@
+﻿user_id,school,task_id,task_code,stage,status,status_updated_at,deadline_at,deadline_timezone,deadline_source,deadline_source_ref,reminder_at,reminder_timezone,reminder_status,notes,updated_at
+smoke_user,HKUST,hkust-apply_student_visa,apply_student_visa,visa,in_progress,2026-07-01T08:05:37+00:00,2026-08-15,Asia/Hong_Kong,portal,,,,,,2026-07-01T08:05:37+00:00

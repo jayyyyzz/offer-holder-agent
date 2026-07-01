@@ -1,0 +1,13 @@
+.git
+.venv
+venv
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache
+.ruff_cache
+frontend-react/node_modules
+data/raw_pages/*.txt
+data/metadata/*.tmp
+data/metadata/openai_runs
