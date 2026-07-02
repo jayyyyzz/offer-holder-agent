@@ -12,6 +12,8 @@ data/raw_pages/*.txt
 data/metadata/crawl_log.csv
 data/metadata/*.tmp
 data/metadata/openai_runs/
+deploy/tencent/app.env
+deploy/tencent/caddy.env
 
 # Keep directory and schema templates.
 !data/raw_pages/.gitkeep

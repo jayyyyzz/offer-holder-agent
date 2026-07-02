@@ -576,7 +576,7 @@ npm.cmd run build
 - `tests/test_openai_responses.py`：覆盖 Responses API payload、输出文本解析、retry，以及新的 run metadata 记录。
 - `tests/test_dashboard_api.py`：覆盖 dashboard payload、学校目录、任务源回退、traceability 字段，以及前端写回依赖的个人状态字段。
 - React 前端已实际联调通过：页面可加载、任务源切换可用、任务状态可写回；当前构建产物已更新到 `frontend/`。
-- 当前全量单元测试：80 个通过。
+- 当前全量单元测试：81 个通过。
 
 ## 线上部署
 
@@ -586,24 +586,29 @@ npm.cmd run build
 - 后端仍然是 `app/frontend_server.py`
 - 线上通过容器直接启动 Python 服务，不额外引入新后端框架
 
-仓库里新增了这些部署文件：
+仓库里当前保留的部署相关文件包括：
 
 - `Dockerfile`
 - `.dockerignore`
-- `Procfile`
-- `render.yaml`
+- `docker-compose.tencent.yml`
+- `deploy/tencent/Caddyfile`
+- `deploy/tencent/app.env.example`
+- `deploy/tencent/caddy.env.example`
+- `deploy/tencent/server-setup.sh`
+- `deploy/tencent/deploy.sh`
+- `deploy/tencent/update.sh`
 - `deploy/env.example`
 
 ### 当前推荐的上线方式
 
-优先推荐用支持 Docker 的平台，例如：
+当前默认推荐：
 
-- Render
-- Railway
-- Fly.io
-- 你自己的云服务器 / VPS
+- `腾讯云轻量应用服务器（LightHouse）` 作为应用服务器
+- `Docker Compose` 编排应用和反向代理
+- `Caddy` 自动申请和续签 HTTPS 证书
+- `腾讯云域名 / DNSPod` 做域名解析
 
-这样可以直接复用现在的启动形态，不需要为了部署重写服务层。
+这样可以直接复用现在的容器启动形态，同时保留可写数据目录，不需要为了平台适配重写服务层。
 
 ### 服务当前支持的线上配置
 
@@ -629,44 +634,184 @@ OPENAI_API_KEY
 - `OFFER_AGENT_BASIC_AUTH_USER` / `OFFER_AGENT_BASIC_AUTH_PASSWORD`：建议上线时至少先开 Basic Auth
 - `OFFER_AGENT_READ_ONLY=false`：如果你要保留线上输入数据能力，需要显式允许写入
 
-### Render 方式（当前推荐）
+### 腾讯云轻量服务器 + `zungit.com` 方式（当前推荐）
 
-1. 把仓库推到 GitHub
-2. 在 Render 里选择 `Blueprint`
-3. 指向仓库根目录
-4. 读取根目录的 `render.yaml`
-5. 首次部署时为这个服务创建一个持久磁盘
-6. 配置密钥环境变量：
+#### 1. 先确认腾讯云轻量服务器基础项
+
+建议首版直接用：
+
+- Ubuntu 24.04 LTS
+- 2 GB RAM 起步
+- 单机部署
+
+你现在是 Windows 本地环境，这不影响部署。后续本地连接服务器，直接用 PowerShell 自带的 `ssh` / `scp` 即可。
+
+在腾讯云轻量服务器控制台里，先确认这几件事：
+
+- 服务器有公网 IPv4
+- 轻量服务器防火墙已放行 `22`
+- 轻量服务器防火墙已放行 `80`
+- 轻量服务器防火墙已放行 `443`
+
+这里有一个容易漏掉的点：腾讯云当前中文官方文档里，Linux 系统镜像默认放通的是 `22`、`80` 和 `ICMP`，`443` 需要你手动加规则，否则 Caddy 的 HTTPS 证书申请会失败。
+
+#### 2. 把域名解析到轻量服务器
+
+在腾讯云域名解析 / DNSPod 中添加：
+
+```text
+记录类型: A
+主机记录: @
+记录值: 你的轻量服务器公网 IPv4
+
+记录类型: A
+主机记录: www
+记录值: 你的轻量服务器公网 IPv4
+```
+
+如果你最终只想使用一个主域名，也可以只保留 `@`。
+
+当前这套部署默认主域名直接用：
+
+```text
+zungit.com
+```
+
+#### 3. 用 Windows PowerShell 连上服务器
+
+如果腾讯云控制台给你的是密码登录，常见连接方式是：
+
+```powershell
+ssh ubuntu@你的服务器公网IP
+```
+
+如果你用的是密钥文件，常见方式是：
+
+```powershell
+ssh -i C:\Users\jay\.ssh\你的密钥文件 ubuntu@你的服务器公网IP
+```
+
+不同镜像用户名可能是 `ubuntu`、`root` 或你自己在控制台创建的用户，以服务器实际登录方式为准。
+
+#### 4. 把代码放到服务器
+
+如果你的 GitHub 仓库已经是最新代码，推荐直接在服务器执行：
+
+```bash
+git clone https://github.com/jayyyyzz/offer-holder-agent.git
+cd offer-holder-agent
+```
+
+如果你本地有还没推到 GitHub 的改动，也可以在 Windows PowerShell 里直接上传：
+
+```powershell
+scp -r "C:\Users\jay\Documents\offer holder agent" ubuntu@你的服务器公网IP:/home/ubuntu/offer-holder-agent
+```
+
+然后再 SSH 进入服务器：
+
+```bash
+cd /home/ubuntu/offer-holder-agent
+```
+
+#### 5. 在服务器安装 Docker
+
+进入仓库目录后执行：
+
+```bash
+sudo bash deploy/tencent/server-setup.sh
+```
+
+这个脚本会安装：
+
+- Docker Engine
+- Docker Compose Plugin
+
+#### 6. 准备服务器环境文件
+
+在服务器上复制模板：
+
+```bash
+cp deploy/tencent/app.env.example deploy/tencent/app.env
+cp deploy/tencent/caddy.env.example deploy/tencent/caddy.env
+```
+
+然后至少修改这几个值：
+
+```text
+# deploy/tencent/app.env
+OFFER_AGENT_BASIC_AUTH_USER=jayz
+OFFER_AGENT_BASIC_AUTH_PASSWORD=一个强密码
+OFFER_AGENT_READ_ONLY=false
+OPENAI_API_KEY=你的真实 key
+
+# deploy/tencent/caddy.env
+APP_DOMAIN=zungit.com
+```
+
+如果你暂时不想在线上调用模型，也可以先把：
+
+```text
+OPENAI_API_KEY=
+```
+
+保持为空，先把服务本身跑起来。
+
+#### 7. 启动整套服务
+
+```bash
+bash deploy/tencent/deploy.sh
+```
+
+这一步会启动：
+
+- `offer-holder-agent` 应用容器
+- `caddy` 反向代理容器
+
+其中：
+
+- Caddy 会监听 `80/443`
+- 应用容器只暴露内部 `8080`
+- HTTPS 证书会由 Caddy 自动申请
+
+#### 8. 首次上线后检查
+
+上线后可直接检查：
+
+```text
+https://zungit.com/health
+https://zungit.com/
+```
+
+如果你先想在服务器本机确认容器是通的，也可以先跑：
+
+```bash
+docker compose -f docker-compose.tencent.yml ps
+curl http://127.0.0.1:8080/health
+```
+
+#### 9. 后续更新发布
+
+后续服务器上拉新代码后，直接执行：
+
+```bash
+bash deploy/tencent/update.sh
+```
+
+当前仓库已经把 `OFFER_AGENT_BASIC_AUTH_USER` 预设为 `jayz`，所以你实际需要提供给服务器的是：
 
 ```text
 OFFER_AGENT_BASIC_AUTH_PASSWORD=一个强密码
 OPENAI_API_KEY=你的真实 key
+APP_DOMAIN=zungit.com
 ```
-
-当前仓库已经把 `OFFER_AGENT_BASIC_AUTH_USER` 预设为 `jayz`，因此首次在 Render 上实际还需要你补的是：
-
-```text
-OFFER_AGENT_BASIC_AUTH_PASSWORD=一个强密码
-OPENAI_API_KEY=你的真实 key
-```
-
-当前根目录的 `render.yaml` 已经预置了这些内容：
-
-- Docker 部署
-- `/health` 健康检查
-- 持久磁盘挂载到 `/app/data`
-- `OFFER_AGENT_RUNTIME_DATA_ROOT=/app/data`
-- `OFFER_AGENT_SEED_DATA_ROOT=/app-seed-data`
-- `OFFER_AGENT_READ_ONLY=false`
-
-另外，按 Render 当前文档，持久磁盘只能挂到付费服务上，不能用于 free web service；并且挂盘后服务会受单实例约束，部署时也不再是 zero-downtime。这个项目现在的 `plan: starter` 就是沿着这个边界设计的。
 
 ### 当前这套“可写版”是怎么工作的
 
 当前线上写入仍然使用 CSV，但做了两层处理：
 
 1. 镜像里保留一份初始种子数据：`/app-seed-data`
-2. Render 持久盘挂载到 `/app/data`
+2. Docker volume 挂载到 `/app/data`
 
 服务启动时会先执行：
 
@@ -681,7 +826,7 @@ OPENAI_API_KEY=你的真实 key
 
 ### 为什么这版可以保留线上输入数据
 
-因为这次已经不是“临时容器写本地盘”，而是“单实例 + 持久磁盘 + 运行时数据根目录”。
+因为这次已经不是“临时容器写本地盘”，而是“单实例 + Docker volume + 运行时数据根目录”。
 
 但边界仍然很明确：
 
@@ -721,19 +866,20 @@ OPENAI_API_KEY=你的真实 key
 
 它的意义是先把上线门槛降下来，同时把“线上可输入数据”控制在一个目前还算稳的边界里。
 
-## 当前部署进度（2026-07-01）
+## 当前部署进度（2026-07-02）
 
 这一轮和线上部署直接相关的工作，已经推进到这里：
 
-1. **Render 可写版骨架已经补齐**
-   - `render.yaml` 已经放在仓库根目录
+1. **腾讯云版本部署骨架已经切好**
    - `Dockerfile` 已经支持先构建 React，再启动 Python 服务
+   - `docker-compose.tencent.yml` 已经定义好应用容器 + Caddy 反向代理
+   - `deploy/tencent/Caddyfile` 已经接好域名入口和 HTTPS 代理
    - `app/start_server.py` 会在服务启动前先执行 runtime data seed
-   - `app/runtime_data.py` 会把镜像里的种子数据复制到持久盘目录
+   - `app/runtime_data.py` 会把镜像里的种子数据复制到运行时数据卷
    - `app/frontend_server.py` 已经支持 Basic Auth、`/health`、以及 read-only / writable 切换
 
 2. **线上“可输入数据”模式已经具备最小闭环**
-   - Render 持久盘挂载到 `/app/data`
+   - Docker volume 挂载到 `/app/data`
    - 镜像内种子数据目录是 `/app-seed-data`
    - 首次部署不是空数据启动
    - 之后用户在前端写入的状态会落到持久盘而不是临时容器文件系统
@@ -744,48 +890,32 @@ OPENAI_API_KEY=你的真实 key
    - `data/metadata/openai_runs/` 已加入 `.gitignore`
    - 前端联调留下的 demo `user_task_states.csv` 记录已经清空，只保留表头
    - 已重新检查仓库，没有把真实 `OPENAI_API_KEY` 写进代码或文档
+   - 部署目录里的运行时环境文件忽略路径已经从 `deploy/do/*` 切换到 `deploy/tencent/*`
 
-4. **GitHub 接线状态已确认**
-   - 目标仓库：`jayyyyzz/offer-holder-agent`
-   - 本地仓库已加上 `origin`
-   - 远端 `main` 已存在一个初始提交（只有一行 README）
-   - 本地当前还是“尚未形成首个提交”的工作树，所以后面推送前要先把本地历史和远端初始提交接起来
+4. **腾讯云环境说明已经和真实部署目标对齐**
+   - README 已经从 DigitalOcean 迁回腾讯云轻量服务器语义
+   - 默认域名示例已经切成 `zungit.com`
+   - 部署脚本路径已经统一为 `deploy/tencent/*`
+   - 文档已经补上 Windows PowerShell 连接服务器的做法
+   - 文档已经明确提示腾讯云轻量服务器需要手动确认 `443` 放通
 
-5. **当前阻塞点也已经确认**
-   - 这台机器上没有安装 `gh`
-   - 因此不能直接走完整的 GitHub CLI 发布流
-   - 但这不影响继续完成本地整理、提交准备、远端接线和 Render 配置说明
-
-6. **发布前验证已完成**
-   - 全量单元测试已通过：81/81
-   - `compileall` 已通过
-   - React 生产构建已通过，构建产物已刷新到 `frontend/`
-   - 按接近线上配置做过一次本地 smoke test：`/health`、Basic Auth、`/api/dashboard`、`/api/task-state`、runtime seed 复制均已通过
+5. **当前剩下的是服务器实操信息**
+   - 这台机器上不需要腾讯云 CLI 也能部署，因为当前方案走 SSH + Docker Compose
+   - 真正还缺的是你的轻量服务器公网 IP、SSH 登录用户名，以及密码或私钥文件
+   - 如果你希望我继续直接推进到真正上线，这三项是下一步必须补齐的
 
 ## 当前部署下一步
 
-如果目标是把这版尽快上线到 Render，接下来的顺序应该是：
+如果目标是把这版尽快上线到腾讯云轻量服务器，接下来的顺序应该是：
 
-1. **完成本地首个 Git 提交，并接上远端 `main` 的初始历史**
-   - 因为远端仓库不是空仓库，不能把本地无历史工作树直接当成“全新仓库”推上去
-   - 这一步的目的，是让本地代码和远端 `main` 进入同一条 Git 历史
-
-2. **把代码推到 GitHub**
-   - 最理想是本机已安装并登录 `gh`
-   - 如果不用 `gh`，也可以直接用 `git push`，前提是这台机器已有 GitHub 凭据可用
-
-3. **在 Render 创建 Blueprint Web Service**
-   - 指向仓库根目录
-   - 读取根目录 `render.yaml`
-   - 保持 `starter` 或其他付费实例
-
-4. **在 Render 补三项关键 Secret**
-   - `OFFER_AGENT_BASIC_AUTH_USER`
-   - `OFFER_AGENT_BASIC_AUTH_PASSWORD`
-   - `OPENAI_API_KEY`
-
-5. **首轮部署后做一次线上验收**
-   - 打开 `/health`
+1. **把当前仓库代码推到你要部署的仓库或服务器**
+2. **在腾讯云轻量服务器防火墙里确认 `22`、`80`、`443` 已放通**
+3. **在腾讯云域名解析里把 `zungit.com` 的 A 记录指向轻量服务器公网 IP**
+4. **在服务器准备 `deploy/tencent/app.env` 和 `deploy/tencent/caddy.env`**
+5. **运行 `deploy/tencent/server-setup.sh` 安装 Docker**
+6. **运行 `deploy/tencent/deploy.sh` 启动服务**
+7. **首轮上线后做一次线上验收**
+   - 打开 `https://zungit.com/health`
    - 用 Basic Auth 登录首页
    - 测试一次任务状态写回
    - 确认容器重启后写入数据仍在
@@ -1031,7 +1161,7 @@ notes,updated_at
 
 当前验证结果：
 
-- 单元测试：80 个通过。
+- 单元测试：81 个通过。
 - 编译检查：通过。
 - React 构建：通过。
 

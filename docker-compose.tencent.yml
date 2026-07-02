@@ -1,0 +1,44 @@
+services:
+  offer-holder-agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    env_file:
+      - deploy/tencent/app.env
+    environment:
+      PORT: "8080"
+      OFFER_AGENT_HOST: "0.0.0.0"
+      OFFER_AGENT_PORT: "8080"
+      OFFER_AGENT_RUNTIME_DATA_ROOT: /app/data
+      OFFER_AGENT_SEED_DATA_ROOT: /app-seed-data
+    volumes:
+      - offer_agent_data:/app/data
+    expose:
+      - "8080"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/health', timeout=5)"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 20s
+
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    depends_on:
+      - offer-holder-agent
+    ports:
+      - "80:80"
+      - "443:443"
+    env_file:
+      - deploy/tencent/caddy.env
+    volumes:
+      - ./deploy/tencent/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  offer_agent_data:
+  caddy_data:
+  caddy_config:
